@@ -32,6 +32,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation project(':initer-api')
-    annotationProcessor project(':initer-compiler')
+//    implementation project(':initer-api')
+//    annotationProcessor project(':initer-compiler')
+
+    api 'com.hzq.android:initer-api:1.0.1'
+    annotationProcessor 'com.hzq.android:initer-compiler:1.0.1'
 }

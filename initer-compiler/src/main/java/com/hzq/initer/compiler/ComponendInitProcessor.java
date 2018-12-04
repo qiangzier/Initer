@@ -37,14 +37,13 @@ import static com.hzq.initer.compiler.Consts.TEMPLATE_NAME;
 import static com.hzq.initer.compiler.Consts.WARNING_TIPS;
 
 /**
- * 初始化组件代理类生成器
  * Created by hezhiqiang on 2018/11/26.
  */
 
-@AutoService(Processor.class)                       //自动注册注解处理器
+@AutoService(Processor.class)                       //auto register processor
 @SupportedOptions({KEY_MODULE_NAME})
-@SupportedSourceVersion(SourceVersion.RELEASE_7)    //指定使用的Java版本
-@SupportedAnnotationTypes(ANNOTATION_NAME)          //指定要处理的注解类型
+@SupportedSourceVersion(SourceVersion.RELEASE_7)    //use java version
+@SupportedAnnotationTypes(ANNOTATION_NAME)          //processor type
 public class ComponendInitProcessor extends AbstractProcessor {
 
     private Filer mFiler;
@@ -90,7 +89,7 @@ public class ComponendInitProcessor extends AbstractProcessor {
             TypeElement type_context = mElements.getTypeElement(CONTEXT_NAME);
 
             /**
-             * 生成参数
+             * generator params
              * (Context context,boolean isDebug)
              */
             ParameterSpec param_Context = ParameterSpec.builder(ClassName.get(type_context),"context").build();
@@ -108,17 +107,16 @@ public class ComponendInitProcessor extends AbstractProcessor {
             for (Element element : elements) {
                 logger.info("componendInit#name = " + element.asType().toString());
                 TypeMirror tm = element.asType();
-                //必须是IComponentInit的子类
-                if(types.isSubtype(tm,type_componentinit.asType())) {
-                    initMethod.addStatement("new " + tm.toString() + "().init(context,isDebug)");
-                } else {
-                    throw new RuntimeException("Initer::Compiler >>> Found unsupported class type, type = [" + types.toString() + "] must be implements com.hzq.initer.api.IComponentInit接口");
-                }
+//                if(types.isSubtype(tm,type_componentinit.asType())) {
+                initMethod.addStatement(tm.toString() + ".init(context,isDebug)");
+//                } else {
+//                    throw new RuntimeException("Initer::Compiler >>> Found unsupported class type, type = [" + types.toString() + "]");
+//                }
             }
 
 
             /**
-             * 生成类文件
+             * generator class file
              * public class GENERATE_CLASS_NAME implements ILcsComponentInit {
              *      @Override
              *      void init(Context context,boolean isDebug);

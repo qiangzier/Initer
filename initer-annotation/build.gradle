@@ -1,8 +1,15 @@
 apply plugin: 'java-library'
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+ext {
+    bintrayName = 'initer-annotation'
+    artifact = bintrayName
+    libraryName = 'initer annotation'
+    libraryDescription = 'The annotation used in initer api'
+    libraryVersion = '1.0.0'
 }
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+apply from: '../install.gradle'
+apply from: '../bintray.gradle'

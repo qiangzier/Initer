@@ -1,10 +1,22 @@
 apply plugin: 'java-library'
 
+ext {
+    bintrayName = 'initer-compiler'
+    artifact = bintrayName
+    libraryName = 'initer compiler'
+    libraryDescription = 'The annotation used in initer api'
+    libraryVersion = '1.0.1'
+}
+
 dependencies {
     compile 'com.google.auto.service:auto-service:1.0-rc2'
     compile 'com.squareup:javapoet:1.7.0'
-    implementation project(':initer-annotation')
+//    implementation project(':initer-annotation')
+    compile 'com.hzq.android:initer-annotation:1.0.0'
 }
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+apply from: '../install.gradle'
+apply from: '../bintray.gradle'

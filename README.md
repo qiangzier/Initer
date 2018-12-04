@@ -28,20 +28,19 @@ android {
 
 dependencies {
    //......
-    api project(':initer-api')
-    annotationProcessor project(':initer-compiler')
+    implementation 'com.hzq.android:initer-api:1.0.1'
+    annotationProcessor 'com.hzq.android:initer-compiler:1.0.0'
 }
 
 ```
 
-2、创建初始化组件工具类实现 com.hzq.initer.api.IComponentInit接口，并添加@Inite注解。
+2、创建初始化组件工具类，并添加@Inite注解。注意这里是静态调用，所以init方法必须是static的
 
 ```
 @Inite
-public class TestIniter1 implements IComponentInit {
+public class TestIniter1 {
 
-    @Override
-    public void init(Context context, Boolean isDebug) {
+    public static void init(Context context, Boolean isDebug) {
         Log.d("xxxTestIniter1","TestIniter1#init is be call");
     }
 }
