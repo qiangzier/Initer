@@ -51,3 +51,7 @@ public class TestIniter1 {
 ```
 Initer.init(this,BuildConfig.DEBUG);
 ```
+
+### 原理解析
+
+[戳我](https://juejin.im/post/5c063843e51d451db1421a70)
